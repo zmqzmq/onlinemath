@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html ng-app="myApp" ng-controller="myAppCtrl">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>GenerateMath&Download</title>
+		
+    	<script src="js/jquery-1.11.3.min.js"></script>		
+		<script src="js/angular.min.js"></script>
+		<script src="js/angular-route.min.js"></script>				
+	    <script src="js/ui-bootstrap-tpls-0.13.0.min.js"></script>
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+	    <link href="css/panes.css" rel="stylesheet" type="text/css" />
+		<script src="js/myApp.js"></script>
+		<script src="js/myAppCtrl.js"></script>
+
+        <style type="text/css" media="screen">
+            #container { overflow:hidden; }
+			#header-content{ float:top;height:30%;overflow:hidden; background: lightblue;}
+            #sub-content { float:right;width:30%; height:70%;background:lightgrey;border:0px solid red;}
+            #main-content { height:70%; border:0px solid yellow;}
+            #container .shrinkCol { width:0px; }
+            #container .shrinkRow { height:0px; }
+
+            .body.row { top:0px; bottom:30px; padding:0px; }
+            .footer.row { height: 30px; bottom: 0px; background: #333; color:white; text-align:center;}
+        </style>
+
+    </head>
+
+    <body>
+        <div class="body row"  id="container" >
+            <div id="header-content" >
+				<form name="paramForm" style="padding:5px;display:inline-block;vertical-align:middle;border:0px solid red;" novalidate>			
+					<ng-include src="'partialView/ParamPartial.html'"></ng-include>	
+				</form>
+			</div>
+			
+  	
+            <div id="main-content" class="scroll-y" style="padding-left:10%;">
+
+				<div style="float:right;padding-right:2%;">
+					<button type="button" id="togglerRow" class="btn btn-info" >
+					<span class="glyphicon glyphicon-chevron-up"></span> ParamPanel
+					</button>				
+				</div>
+				Please input a number: <input type="text" ng-model="numGenerate" size="5" >
+				<div class="btn-group">
+						<button type="button" class="btn btn-primary" ng-click="generateBatch()" ng-disabled = "paramForm.$invalid">Generate</button>
+						<a type="button" class="btn btn-primary" download="autoGenerate{{numGenerate}}.txt" ng-disabled="quesStringBatch.length==0 || paramForm.$invalid" ng-href="{{ blobURL }}">download</a>
+				</div>
+
+				<p ng-repeat=" s in quesStringBatch">{{ s }}</p>
+ 
+
+			</div>
+		</div>
+
+        <div class="footer row">
+			<ng-include src="'partialView/FooterPartial.html'"></ng-include>
+        </div>
+    </body>
+
+
+ 	<script src="js/myApp.js"></script>
+	<script src="js/myAppCtrl.js"></script>	
+	<script src="js/myJs.js"></script>
+
+</html>
